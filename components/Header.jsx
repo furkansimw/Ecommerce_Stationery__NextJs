@@ -6,8 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { SearchIcon, CartIcon, FavoritesIcon } from "./Icons";
 import FavoritesPopup from "./FavoritesPopup";
+import NotificationPopup from "./NotificationPopup";
+import { GetContext } from "@/app/layout";
 
 const Header = ({ sidebar, _sidebar }) => {
+  const { favoritespopup, _favoritespopup } = GetContext();
   const setter = (value) => {
     if (panel && panel != value) {
       _panel(null);
@@ -23,7 +26,6 @@ const Header = ({ sidebar, _sidebar }) => {
       _panel(null);
     }, 0);
   };
-  const [favoritespopup, _favoritespopup] = useState(false);
   const [panel, _panel] = useState(null);
   const [h, _h] = useState(null);
   const ref = createRef(0);
@@ -41,9 +43,11 @@ const Header = ({ sidebar, _sidebar }) => {
       window.removeEventListener("scroll", worker);
     };
   }, []);
-
+  const openFav = () => _favoritespopup(true);
+  const closeFav = () => _favoritespopup(false);
   return (
     <>
+      <NotificationPopup {...{ openFav, closeFav }} />
       <div className={`header ${c} ${s}`}>
         <div className="upside">
           <Link
@@ -68,7 +72,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <li
                 onMouseEnter={() => setter("shopall")}
                 onMouseLeave={() => _panel(null)}
-                className={panel == "shopall" && "active"}
+                className={panel == "shopall" ? "active" : ""}
               >
                 <Link onClick={closex} href={"/collections/shop-all"}>
                   Shop All
@@ -77,7 +81,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <li
                 onMouseEnter={() => setter("stationery")}
                 onMouseLeave={() => _panel(null)}
-                className={panel == "stationery" && "active"}
+                className={panel == "stationery" ? "active" : ""}
               >
                 <Link onClick={closex} href={"/collections/stationery"}>
                   Paper & Planners
@@ -86,7 +90,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <li
                 onMouseEnter={() => setter("supplies")}
                 onMouseLeave={() => _panel(null)}
-                className={panel == "supplies" && "active"}
+                className={panel == "supplies" ? "active" : ""}
               >
                 <Link onClick={closex} href={"/collections/supplies"}>
                   Desk Supplies
@@ -95,7 +99,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <li
                 onMouseEnter={() => setter("living")}
                 onMouseLeave={() => _panel(null)}
-                className={panel == "living" && "active"}
+                className={panel == "living" ? "active" : ""}
               >
                 <Link onClick={closex} href={"/collections/living"}>
                   Home Decor
@@ -104,7 +108,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <li
                 onMouseEnter={() => setter("accessories")}
                 onMouseLeave={() => _panel(null)}
-                className={panel == "accessories" && "active"}
+                className={panel == "accessories" ? "active" : ""}
               >
                 <Link onClick={closex} href={"/collections/accessories"}>
                   Apparel & Accessories
@@ -112,7 +116,7 @@ const Header = ({ sidebar, _sidebar }) => {
               </li>
             </ul>
             <div
-              className={`search ${sidebar && "disabled"}`}
+              className={`search ${sidebar ? "disabled" : ""}`}
               onClick={() => _sidebar("search")}
             >
               <SearchIcon />
@@ -135,7 +139,7 @@ const Header = ({ sidebar, _sidebar }) => {
               <FavoritesIcon />
             </div>
             <button
-              className={`menubtn ${sidebar && "disabled"}`}
+              className={`menubtn ${sidebar ? "disabled" : ""}`}
               onClick={() => _sidebar("menu")}
             >
               <div className="box">
@@ -150,9 +154,9 @@ const Header = ({ sidebar, _sidebar }) => {
       </div>
       <div
         onClick={() => _sidebar(null)}
-        className={`black-layer ${sidebar && "active"}`}
+        className={`black-layer ${sidebar || panel ? "active" : ""}`}
       ></div>
-      {favoritespopup && <FavoritesPopup />}
+      {favoritespopup && <FavoritesPopup closeFav={closeFav} />}
     </>
   );
 };

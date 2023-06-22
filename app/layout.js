@@ -5,9 +5,32 @@ import "./globals.scss";
 import { Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const inter = Montserrat({ subsets: ["latin"] });
+
+const Context = createContext();
+
+export const GetContext = () => useContext(Context);
+const ContextProvider = (props) => {
+  const [data, _data] = useState([]);
+  const [n, _n] = useState(false);
+  const [favoritespopup, _favoritespopup] = useState(false);
+
+  const value = { data, _data, n, _n, favoritespopup, _favoritespopup };
+
+  useEffect(() => {
+    try {
+      const a = window.localStorage.getItem("data") || [];
+      const b = JSON.parse(a);
+      _data(b);
+    } catch (error) {
+      window.localStorage.setItem("data", JSON.stringify([]));
+    }
+  }, []);
+
+  return <Context.Provider value={value}>{props.children}</Context.Provider>;
+};
 
 export default function RootLayout({ children }) {
   const [sidebar, _sidebar] = useState(null);
@@ -26,12 +49,14 @@ export default function RootLayout({ children }) {
         <title>Poketo | Art & Design For Your Every Day</title>
       </head>
       <body className={inter.className}>
-        <div className={`wrapper ${sidebar ? "active" : ""}`}>
-          <Header {...{ sidebar, _sidebar }} />
-          {children}
-          <Footer />
-        </div>
-        <SideBar {...{ sidebar, _sidebar }} />
+        <ContextProvider>
+          <div className={`wrapper ${sidebar ? "active" : ""}`}>
+            <Header {...{ sidebar, _sidebar }} />
+            {children}
+            <Footer />
+          </div>
+          <SideBar {...{ sidebar, _sidebar }} />
+        </ContextProvider>
       </body>
     </html>
   );

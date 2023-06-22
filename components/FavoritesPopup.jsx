@@ -1,7 +1,12 @@
 import React from "react";
 
-const FavoritesPopup = () => {
-  return <div>FavoritesPopup</div>;
+const FavoritesPopup = ({ closeFav }) => {
+  return (
+    <>
+      <div className="bg"></div>
+      <div>FavoritesPopup</div>
+    </>
+  );
 };
 
 export default FavoritesPopup;

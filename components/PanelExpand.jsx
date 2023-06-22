@@ -108,7 +108,7 @@ const PanelExpand = ({ panel, _panel, closex }) => {
     <div
       onMouseEnter={() => _panel(ref.current)}
       onMouseLeave={() => _panel(null)}
-      className={`panel ${panel && "active"} ${panel}`}
+      className={`panel ${panel ? "active" : ""} ${panel}`}
     >
       <ul>
         {panel != null &&
