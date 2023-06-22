@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NotFound from "./NotFound";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,24 +9,12 @@ import Image from "next/image";
 
 const ProductPage = ({ product }) => {
   const contentRef = useRef(null);
-
   useEffect(() => {
-    const worker = () => {
-      console.log(
-        contentRef.current.scrollHeight,
-        window.scrollY,
-        window.scrollY + window.innerHeight
-      );
-      if (
-        window.scrollY >= 60 &&
-        window.scrollY + window.innerHeight <= contentRef.current.scrollHeight
-      ) {
-        console.log("worker");
-      }
-    };
+    const worker = () => {};
     window.addEventListener("scroll", worker);
-  }, []);
+  }, [contentRef.current]);
   if (!product) return <NotFound />;
+
   return (
     <div className="productpage">
       <div className="details">
@@ -58,7 +46,7 @@ const ProductPage = ({ product }) => {
             })}
           </Swiper>
         </div>
-        <div ref={contentRef} className="texts">
+        <div className="texts">
           <h1>Texsts</h1>
         </div>
       </div>
