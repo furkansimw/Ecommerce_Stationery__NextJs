@@ -34,7 +34,7 @@ const ContextProvider = (props) => {
 
 export default function RootLayout({ children }) {
   const [sidebar, _sidebar] = useState(null);
-
+  const [sidebartype, _sidebartype] = useState(null);
   useEffect(() => {
     document.querySelector("body").style.overflow = sidebar ? "hidden" : "auto";
   }, [sidebar]);
@@ -51,11 +51,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ContextProvider>
           <div className={`wrapper ${sidebar ? "active" : ""}`}>
-            <Header {...{ sidebar, _sidebar }} />
+            <Header {...{ sidebar, _sidebar, _sidebartype }} />
             {children}
             <Footer />
           </div>
-          <SideBar {...{ sidebar, _sidebar }} />
+          <SideBar {...{ sidebar, _sidebar, sidebartype }} />
         </ContextProvider>
       </body>
     </html>

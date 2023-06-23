@@ -15,12 +15,8 @@ const NotificationPopup = ({ openFav }) => {
     _n(false);
     ref.current = x;
   }, [n]);
-
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      _notification(null);
-    }, 3500);
-
+    const timeout = setTimeout(deleteX, 3500);
     return () => {
       clearTimeout(timeout);
     };

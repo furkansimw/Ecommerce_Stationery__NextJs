@@ -1,5 +1,14 @@
 [
   {
+    "link": "rainbow-spectrum-planner",
+    "text": "Rainbow Spectrum Planner",
+    "price": "$38.00",
+    "cover": "https://cdn.shopify.com/s/files/1/0001/5211/files/PK-SpectrumPlanner-Rainbow-lifestyle_1_1440x.jpg?v=1687351323",
+    "secondary": "https://cdn.shopify.com/s/files/1/0001/5211/files/PK-SpectrumPlanner-RainbowCombo_1440x.jpg?v=1683650759",
+    "category": "stationery",
+    "subcategory": "planners"
+  },
+  {
     "link": "spectrum-wall-planner",
     "text": "Spectrum Wall Planner",
     "price": "$48.00",

@@ -9,8 +9,8 @@ import FavoritesPopup from "./FavoritesPopup";
 import NotificationPopup from "./NotificationPopup";
 import { GetContext } from "@/app/layout";
 
-const Header = ({ sidebar, _sidebar }) => {
-  const { favoritespopup, _favoritespopup } = GetContext();
+const Header = ({ sidebar, _sidebar, _sidebartype }) => {
+  const { favoritespopup, _favoritespopup, data } = GetContext();
   const setter = (value) => {
     if (panel && panel != value) {
       _panel(null);
@@ -20,7 +20,7 @@ const Header = ({ sidebar, _sidebar }) => {
     }
   };
   const closex = () => {
-    _sidebar(null);
+    _sidebar(false);
     _panel(null);
     setTimeout(() => {
       _panel(null);
@@ -117,7 +117,10 @@ const Header = ({ sidebar, _sidebar }) => {
             </ul>
             <div
               className={`search ${sidebar ? "disabled" : ""}`}
-              onClick={() => _sidebar("search")}
+              onClick={() => {
+                _sidebar(true);
+                _sidebartype("search");
+              }}
             >
               <SearchIcon />
             </div>
@@ -132,7 +135,7 @@ const Header = ({ sidebar, _sidebar }) => {
             >
               <CartIcon />
               <span>
-                <p>0</p>
+                <p>{data.filter((_) => _.type == "cart").length}</p>
               </span>
             </Link>
             <div onClick={() => _favoritespopup(true)} className="favorites">
@@ -140,7 +143,10 @@ const Header = ({ sidebar, _sidebar }) => {
             </div>
             <button
               className={`menubtn ${sidebar ? "disabled" : ""}`}
-              onClick={() => _sidebar("menu")}
+              onClick={() => {
+                _sidebar(true);
+                _sidebartype("menu");
+              }}
             >
               <div className="box">
                 <div className="line f"></div>
@@ -153,7 +159,7 @@ const Header = ({ sidebar, _sidebar }) => {
         </div>
       </div>
       <div
-        onClick={() => _sidebar(null)}
+        onClick={() => _sidebar(false)}
         className={`black-layer ${sidebar || panel ? "active" : ""}`}
       ></div>
       {favoritespopup && <FavoritesPopup closeFav={closeFav} />}

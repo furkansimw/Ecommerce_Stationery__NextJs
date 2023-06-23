@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import data from "../../../data.json";
 import products from "../../../products.json";
@@ -11,6 +11,24 @@ function Page() {
   const { a: params } = useParams();
   const [categoryname, productname] = params.split("/");
   const obj = data?.find((obj) => obj.link == `/${categoryname}`);
+
+  useEffect(function () {
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((entry, index) => {
+        const intersecting = entry.isIntersecting;
+        if (intersecting) {
+          entry.target.classList.add("down-to-up");
+          entry.target.style.animationDelay = `${index * 120}ms`;
+        } else {
+          entry.target.style.animationDelay = "0ms";
+        }
+      });
+    });
+    Array.from(document.querySelectorAll("#productsx3 > li")).map((obj) =>
+      observer.observe(obj)
+    );
+  }, []);
+
   if (!obj) return <></>;
   if (productname) {
     return (
@@ -103,7 +121,7 @@ function Page() {
           <option value="price-descending">Price, high to low</option>
         </select>
       </div>
-      <ul>
+      <ul id="productsx3">
         {products.map((product) => {
           return (
             <li key={product.link}>
