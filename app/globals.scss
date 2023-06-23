@@ -1188,8 +1188,8 @@ body {
           }
           & ~ .white-layer {
             opacity: 0.4;
-            width: 100vw;
-            height: 100vh;
+            width: 100vw !important;
+            height: 100vh !important;
           }
         }
         height: 55px;
