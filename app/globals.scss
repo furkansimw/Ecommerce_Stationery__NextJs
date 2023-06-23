@@ -33,18 +33,21 @@ body {
 .black-layer {
   top: 0px;
   left: 0px;
-  width: 100%;
   z-index: 100;
-  height: 100%;
+  width: 0px;
+  height: 0px;
   pointer-events: none;
-  background-color: #000;
+  background-color: transparent;
   opacity: 0;
   position: absolute;
   transition: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .black-layer.active {
+  background-color: #000;
   opacity: 0.7;
+  width: 100%;
+  height: 100%;
   pointer-events: all;
 }
 
@@ -631,6 +634,7 @@ body {
     width: 100%;
     min-height: 100vh;
     align-items: start;
+    margin-top: 4rem;
     height: 100%;
     .swiper {
       width: 100%;
@@ -638,6 +642,7 @@ body {
     .images {
       border-right: 1px solid #e7e7e7;
       border-bottom: 1px solid #e7e7e7;
+      padding-left: 2rem;
       .swiper-pagination-bullet {
         width: 12px;
         height: 12px;
@@ -648,7 +653,7 @@ body {
         background-color: #565656;
       }
       position: sticky;
-      top: 0px;
+      top: 6rem;
       z-index: 70;
       max-width: 100vw;
       height: 100vh;
@@ -1101,7 +1106,7 @@ body {
   .container2 {
     width: 100%;
     height: 100vh;
-    background-size: auto;
+    background-size: 100%;
     background-image: url("/bg.jpg");
     background-repeat: no-repeat;
     background-position: right;
@@ -1128,14 +1133,14 @@ body {
         color: #0a0909;
       }
       .white-layer {
-        width: 100%;
-        height: 100vh;
+        width: 0px;
+        height: 0px;
         left: 0px;
         top: 0px;
         background-color: #fff;
         z-index: 50;
         opacity: 0;
-        transition: 0.25s ease-in-out opacity;
+        transition: 0.35s ease-in-out opacity;
         position: absolute;
         pointer-events: none;
       }
@@ -1146,6 +1151,7 @@ body {
         justify-content: start;
         align-items: center;
         height: 55px;
+        top: 0px;
         position: relative;
         font-weight: 700;
         width: 120px;
@@ -1162,11 +1168,28 @@ body {
 
         &:hover {
           width: 155px;
+          @keyframes kfx {
+            0% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 1;
+            }
+            75% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+          animation: kfx 0.5s ease-in-out;
           svg {
             opacity: 1;
           }
           & ~ .white-layer {
             opacity: 0.4;
+            width: 100vw;
+            height: 100vh;
           }
         }
         height: 55px;
@@ -1362,6 +1385,7 @@ section.split {
     color: #565656;
     height: min-content !important;
     h1 {
+      cursor: default;
       text-decoration: underline;
       font-size: 15px;
       line-height: 25px;
@@ -1386,8 +1410,167 @@ section.split {
         margin: 10px;
         a {
           color: #565656;
+          &:hover {
+            color: #1990ca;
+          }
         }
       }
     }
+  }
+}
+
+.cartpage {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  @media screen and (max-width: 1000px) {
+    display: block;
+    .left {
+      width: 100% !important;
+    }
+    h1 {
+      padding: 0px !important;
+      text-align: center;
+      margin-top: 4rem;
+      max-width: none !important;
+      white-space: nowrap !important;
+      font-size: 40px !important;
+      line-height: 50px !important;
+      &::after {
+        left: 50%;
+      }
+    }
+  }
+  .left {
+    width: 100%;
+    padding-bottom: 25%;
+    h1 {
+      padding-left: 14rem;
+      width: 100%;
+      max-width: 475px;
+      opacity: 0.7;
+      font-size: 400%;
+      line-height: 6rem;
+      position: sticky;
+      top: 50%;
+      transform: translate(0px -50%);
+      left: 0px;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -3rem;
+        left: 50%;
+        width: 100px;
+        height: 5px;
+        opacity: 0.7;
+        background-color: #565656;
+      }
+    }
+  }
+  .list {
+    border-left: 1px solid rgba(231, 231, 231);
+    width: 100%;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    li {
+      padding-left: 120px;
+      margin-bottom: 40px;
+      display: flex;
+      width: 100%;
+      padding-right: 4rem;
+      align-items: center;
+      .pp {
+        margin-right: 2rem;
+        img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+        }
+      }
+      .div {
+        width: 100%;
+        font-size: 1rem;
+        .text {
+          margin-bottom: 10px;
+          color: #565656;
+          width: fit-content;
+          font-weight: 700;
+          border-bottom: 1px dotted #565656;
+          &:hover {
+            color: #1990ca;
+          }
+        }
+      }
+      input[type="number"] {
+        width: 55px;
+        height: 55px;
+        border: none;
+        font-size: 1rem;
+        text-align: center;
+        &::-webkit-outer-spin-button {
+          appearance: none;
+          -ms-progress-appearance: none;
+          -webkit-appearance: none;
+        }
+        &::-webkit-inner-spin-button {
+          appearance: none;
+          -ms-progress-appearance: none;
+          -webkit-appearance: none;
+        }
+        background-color: #e7e7e7;
+      }
+      button {
+        margin-left: 1rem;
+      }
+    }
+    .down {
+      padding: 2rem 120px;
+      .sm {
+        font-size: 15px;
+        margin: 4px 0px;
+      }
+      textarea {
+        font-family: inherit;
+        padding: 20px;
+        font-size: 1rem;
+        border: none;
+        resize: none;
+        width: 100%;
+        height: 8rem;
+        border-radius: 4px;
+        background-color: #e7e7e7;
+        margin-bottom: 4rem;
+      }
+      .smx {
+        margin-bottom: 1rem;
+        font-size: 27px;
+        font-weight: 700;
+        opacity: 0.75;
+        span {
+          opacity: 1;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+      }
+      .x {
+        font-size: 11px;
+      }
+      .co {
+        margin-top: 2rem;
+        height: 55px;
+        background-color: #565656;
+        color: #fff;
+        &:hover {
+          background-color: #1990ca;
+        }
+        font-weight: 700;
+        padding: 0px 20px;
+      }
+    }
+    /*
+      furkan
+        --  19
+      simsek
+    */
   }
 }

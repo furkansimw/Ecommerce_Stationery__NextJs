@@ -15,9 +15,19 @@ export const GetContext = () => useContext(Context);
 const ContextProvider = (props) => {
   const [data, _data] = useState([]);
   const [n, _n] = useState(false);
+  const [xd, _xd] = useState(false);
   const [favoritespopup, _favoritespopup] = useState(false);
 
-  const value = { data, _data, n, _n, favoritespopup, _favoritespopup };
+  const value = {
+    data,
+    _data,
+    n,
+    _n,
+    favoritespopup,
+    _favoritespopup,
+    xd,
+    _xd,
+  };
 
   useEffect(() => {
     try {

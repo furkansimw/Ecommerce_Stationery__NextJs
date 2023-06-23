@@ -31,6 +31,7 @@ const Header = ({ sidebar, _sidebar, _sidebartype }) => {
   const ref = createRef(0);
   const [s, _s] = useState("up");
   const [c, _c] = useState("c");
+
   useEffect(() => {
     const worker = () => {
       _s(window.scrollY > ref.current ? "down" : "up");
@@ -43,6 +44,7 @@ const Header = ({ sidebar, _sidebar, _sidebartype }) => {
       window.removeEventListener("scroll", worker);
     };
   }, []);
+
   const openFav = () => _favoritespopup(true);
   const closeFav = () => _favoritespopup(false);
   return (
