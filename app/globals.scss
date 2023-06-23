@@ -729,6 +729,7 @@ body {
       .heart {
         width: 55px;
         height: 55px;
+        position: relative;
         svg {
           width: 36px;
           height: 36px;
@@ -737,6 +738,29 @@ body {
         &.active svg {
           opacity: 0.6;
           fill: #ff4500 !important;
+        }
+        .uppopup {
+          position: absolute;
+          bottom: 38px;
+          left: 0px;
+          padding: 8px;
+          width: 100px;
+          background-color: #000;
+          border-radius: 8px;
+          color: #fff;
+          height: 0px;
+          height: 50px !important;
+          span {
+            text-decoration: underline;
+          }
+          opacity: 0;
+          transition: 0.2s ease-in-out opacity, 0.2s ease-in-out bottom;
+        }
+        &.active:hover {
+          .uppopup {
+            bottom: 3rem;
+            opacity: 0.6 !important;
+          }
         }
       }
       .desc {
@@ -897,6 +921,7 @@ body {
 }
 
 .notification {
+  cursor: pointer;
   position: fixed;
   z-index: 2299;
   background-color: #fff;
@@ -1572,5 +1597,129 @@ section.split {
         --  19
       simsek
     */
+  }
+}
+.bg {
+  background-color: #000;
+  z-index: 998;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.favoritespopup {
+  position: fixed;
+  z-index: 999;
+  max-width: 1100px;
+  width: 100%;
+  min-height: 500px;
+  height: 80vh;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #fff;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  .upline {
+    height: 40px;
+    width: 100%;
+    background-color: #434655;
+    button {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 60px;
+      height: 40px;
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+  .second {
+    margin: 50px 50px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #7e7e7e;
+    padding-bottom: 2rem;
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+  ul {
+    display: grid;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 50px;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    @media screen and (max-width: 1000px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    li {
+      position: relative;
+      .close {
+        right: 0px;
+        top: 0px;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        svg {
+          width: 100%;
+          height: 100%;
+          opacity: 0.5;
+        }
+      }
+      a {
+        color: #565656;
+      }
+      height: 342px;
+      margin-bottom: 1rem;
+      border: 1px solid #565656;
+      img {
+        width: 100%;
+        border: 1px solid transparent;
+        object-fit: cover;
+        aspect-ratio: 1;
+      }
+      .text {
+        min-height: 136px;
+        height: 136px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        .title {
+          max-width: 232px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-lines: 2;
+          white-space: nowrap;
+          padding: 1rem;
+          font-weight: 700;
+          font-size: 0px 1rem;
+        }
+        .price {
+          padding: 0px 1rem 1rem;
+          font-size: 18px;
+          font-weight: 700;
+        }
+        button {
+          width: 100%;
+          height: 28px;
+          color: #fff;
+          font-weight: 700;
+          &:hover {
+            opacity: 0.9;
+          }
+          background-color: #434655;
+        }
+      }
+    }
   }
 }

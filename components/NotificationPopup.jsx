@@ -3,6 +3,7 @@ import products from "../products.json";
 import { GetContext } from "@/app/layout";
 import Image from "next/image";
 import { CloseIcon } from "./Icons";
+import { useRouter } from "next/navigation";
 
 const NotificationPopup = ({ openFav }) => {
   const { data, n, _n } = GetContext();
@@ -21,11 +22,17 @@ const NotificationPopup = ({ openFav }) => {
       clearTimeout(timeout);
     };
   }, [notification]);
-
   const deleteX = () => _notification(null);
+  const nav = useRouter();
   return (
     <div
-      onClick={openFav}
+      onClick={() => {
+        if (data[0]?.type == "cart") {
+          nav.push("/cart");
+        } else {
+          openFav();
+        }
+      }}
       className={`notification ${notification && "active"}`}
     >
       <Image
@@ -38,7 +45,7 @@ const NotificationPopup = ({ openFav }) => {
       />
       <p>
         <span>{notification?.text || ref.current?.text}</span> has been added to{" "}
-        <span>1 list </span>
+        <span>1 {data[0]?.type == "cart" ? "cart" : "list"} </span>
         successfully.
       </p>
       <button onClick={deleteX} className="close">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CloseIcon, SearchIcon } from "./Icons";
 import products from "../products.json";
 import Image from "next/image";
@@ -28,8 +28,11 @@ const SideBar = ({ sidebar, _sidebar, sidebartype }) => {
 };
 
 const SearchSideBar = ({ sidebar, _sidebar }) => {
+  const ref = useRef(null);
+
   useEffect(() => {
     _text("");
+    ref.current?.focus();
   }, [sidebar]);
 
   const [text, _text] = useState("");
@@ -44,6 +47,8 @@ const SearchSideBar = ({ sidebar, _sidebar }) => {
       <div className="input">
         <input
           type="text"
+          ref={ref}
+          autoFocus
           name="text"
           id="text"
           onChange={(e) => _text(e.target.value)}

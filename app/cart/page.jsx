@@ -12,6 +12,7 @@ const Page = () => {
   const [totalprice, _totalprice] = useState(0);
 
   useEffect(() => {
+    console.log({ data });
     const newCartItems = data
       .filter((_) => _.type == "cart")
       .map((_) => {
@@ -86,8 +87,9 @@ const Page = () => {
                 </form>
                 <button
                   onClick={() => {
-                    console.log(data);
-                    const ndata = data.filter((_) => _.text != product.text);
+                    const ndata = data.filter(
+                      (_) => _.type != "cart" || _.text != product.text
+                    );
                     _data(ndata);
                     window.localStorage.setItem("data", JSON.stringify(ndata));
                   }}
@@ -104,6 +106,7 @@ const Page = () => {
             placeholder="Special instructions for seller"
             name=""
             id=""
+            maxLength={151}
             cols="30"
             rows="10"
           ></textarea>

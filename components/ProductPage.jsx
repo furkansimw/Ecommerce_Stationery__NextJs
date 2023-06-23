@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const ProductPage = ({ product }) => {
   const nav = useRouter();
-  const { data, _data, _n } = GetContext();
+  const { data, _data, _n, _favoritespopup } = GetContext();
   const [isfavoritesadded, _isfavoritesadded] = useState(false);
   const { text, cover, secondary, price } = product;
 
@@ -81,6 +81,7 @@ const ProductPage = ({ product }) => {
     }
     nav.push("/cart");
   };
+  const openfav = () => _favoritespopup(true);
   useEffect(() => {
     const worker = () => {};
     window.addEventListener("scroll", worker);
@@ -137,6 +138,9 @@ const ProductPage = ({ product }) => {
               className={`heart ${isfavoritesadded ? "active" : ""}`}
             >
               <HeartIcon />
+              <div className="uppopup">
+                Added. <span onClick={openfav}>View Wishlist</span>
+              </div>
             </button>
           </span>
           <p className="desc">
